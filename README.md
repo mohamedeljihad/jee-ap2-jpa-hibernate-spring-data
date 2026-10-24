@@ -131,12 +131,12 @@ mvn spring-boot:run                                       # H2
 mvn spring-boot:run -Dspring-boot.run.profiles=mysql      # MySQL (XAMPP/WAMP démarré)
 ```
 
-## Captures
-> Les captures sont à ajouter après exécution dans IntelliJ :
-> - console avec les opérations sur les produits ;
-> - console H2 avec les tables `PRODUCT`, `PATIENT`, `MEDECIN`, `RENDEZ_VOUS`, `CONSULTATION`, `USERS`, `ROLE` et `USERS_ROLES` ;
-> - phpMyAdmin après la migration vers MySQL ;
-> - réponses JSON de `/products`, `/patients` et `/users/user1`.
+## Captures (exécution réelle dans IntelliJ, port 8085)
+| | |
+|---|---|
+| Console IntelliJ : SQL généré par Hibernate (`show-sql`) ![](captures/01_intellij_console_hibernate.jpg) | `GET /products` après les opérations CRUD (produit 3 supprimé, produit 2 mis à jour) ![](captures/02_products_json.jpg) |
+| `GET /patients` ![](captures/03_patients_json.jpg) | `GET /users/user1` : utilisateur et rôles, sans le mot de passe ![](captures/04_user1_roles_json.jpg) |
+| Console H2 (`jdbc:h2:mem:products-db`) : les 8 tables générées ![](captures/05_h2_tables.jpg) | Jointure `USERS` / `USERS_ROLES` / `ROLE` (relation ManyToMany) ![](captures/06_h2_users_roles.jpg) |
 
 ## Conclusion
 - JPA sépare le modèle objet de la base : les mêmes entités et repositories fonctionnent sur H2 comme sur MySQL, en changeant seulement la configuration.
